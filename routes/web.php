@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,17 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[ArticleController::class, 'index'])->name('home');
+Route::get('/',[ArticleController::class, 'index'])->name('home')->middleware('auth');
 
-Route::resource('articles', ArticleController::class);
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
+Route::resource('articles', ArticleController::class)->middleware('auth');
 
 Auth::routes();
 

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/fontawesome/all.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/bootstrap/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/main.css')}}">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <title>@yield('title')</title>
 </head>
 <body>
@@ -27,10 +28,18 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  User Name
+                    {{ Auth::user()->first_name }}
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Logout</a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
               </li>
             </ul>
