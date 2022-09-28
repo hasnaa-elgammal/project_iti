@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Support\Facades\Redirect;
 
@@ -16,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles= Article::latest()->get();
+        $articles= Article::latest()->paginate(10);
         return view('articles.index', compact('articles'));
     }
 
@@ -45,7 +46,7 @@ class ArticleController extends Controller
             'description' => $request->description,
             'body' => $request->body,
             'photo' => $newImageName,
-            'user_id'=>1
+            'user_id'=>Auth::id()
         ]);
         return Redirect::route('articles.index');
     }
@@ -71,6 +72,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
+        $this->authorize('update', $article);
         return view('articles.edit', compact('article'));
     }
 
@@ -84,7 +86,7 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, $id)
     {
         $article = Article::find($id);
-
+        $this->authorize('update', $article);
         if($article){
             $imageName = $article->photo;
             if($request->has('photo')){
@@ -109,6 +111,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
+        $article = Article::find($id);
+        $this->authorize('delete', $article);
         Article::destroy($id);
         return Redirect::route('articles.index');
     }

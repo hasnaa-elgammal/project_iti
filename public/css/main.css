@@ -16,6 +16,9 @@ body{
     font-size: 24px;
     color:#8888cd;
 }
+.navbar .nav-item{
+    font-size: 16px;
+}
 .outer-container{
     margin-top: 70px;
 }
@@ -71,13 +74,7 @@ body{
     margin-top: 10px;
     font-size: 14px;
 }
-.home-article-container .sort-btn{
-    margin: 10px;
-    float: right;
-}
-.clear{
-    clear: both;
-}
+
 @media(min-width: 600px) {
     .article-form-container{
         width: 60%;

@@ -21,17 +21,20 @@
                     <div class="author">On: <span>{{date('d-m-Y', strtotime($article->created_at))}}</span></div>
                     <div class="description">{{$article->description}}</div>
                 </div>
+                @can('update', $article)
                 <div class="col-md-2 actions">
-                    <a href="{{route('articles.edit', $article->id)}}" class="btn btn-primary"><i class="far fa-edit"></i></a>
+                    <a href="{{route('articles.edit', $article->id)}}" class="btn btn-primary"><i
+                            class="far fa-edit"></i></a>
                     <form action="{{route('articles.destroy', $article->id)}}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
                         <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                     </form>
                 </div>
+                @endcan
             </div>
             <div class="row article-content">
-                <p class="lead">{{$article->body}}</p>
+                <p class="lead">{!! nl2br($article->body) !!}</p>
             </div>
         </div>
 
