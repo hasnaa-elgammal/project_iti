@@ -117,16 +117,26 @@ body{
     background: white ;
     color: #8888cd;
  }
-
 .fas{
     font-weight: 200;
     font-size: 40px;
 }
-
+.view-more a{
+    text-decoration: none;
+    color: #8888cd;
+    transition: all ease-in-out 0.1s;
+}
+.view-more:hover a{
+    color: #8888cd;
+    text-decoration: underline;
+}
+.view-more:active a{
+    color: #8888cd;
+    text-decoration: underline;
+}
 .min-600{
     min-height: 600px;
 }
-
 
 @media(min-width: 600px) {
     .article-info, .home-article, .article-content p{
