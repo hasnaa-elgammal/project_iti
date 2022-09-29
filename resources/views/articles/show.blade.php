@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="outer-container">
-    <div class="container bg-white article-form-container a-container">
+    <div class="container bg-white article-form-container">
         <div class="head text-center">
             <h2>{{$article->title}}</h2>
         </div>

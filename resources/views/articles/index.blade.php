@@ -1,13 +1,16 @@
 @extends('layouts.layout')
 
 @section('title')
-Home
+Articles
 @endsection
 
 @section('content')
 <div class="outer-container">
-    <div class="bg-white article-form-container home-container">
+    <div class="container article-form-container bg-white min-600">
         <div class="home-article-container">
+            @if (isset($term))
+                <div class="search-result text-center">Search Results of {{$term}}...</div>
+            @endif
             @if (!empty($articles) && $articles->count() > 0)
             @foreach ($articles as $article)
             <div class="row home-article lead">
@@ -23,8 +26,8 @@ Home
                 </div>
                 @can('update', $article)
                 <div class="col-md-2 actions">
-                    <a href="{{route('articles.edit', $article->id)}}" class="btn btn-primary"><i
-                            class="far fa-edit"></i></a>
+                    <a href="{{route('articles.edit', $article->id)}}" class="btn btn-primary">
+                        <i class="far fa-edit"></i></a>
                     <form action="{{route('articles.destroy', $article->id)}}" method="post" class="d-inline">
                         @method('delete')
                         @csrf

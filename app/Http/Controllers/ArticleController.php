@@ -85,7 +85,7 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, $id)
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
         $this->authorize('update', $article);
         if($article){
             $imageName = $article->photo;
@@ -111,9 +111,16 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
         $this->authorize('delete', $article);
         Article::destroy($id);
         return Redirect::route('articles.index');
+    }
+
+    public function searchByTitle()
+    {
+        $term = request('term');
+        $articles = Article::where('title', 'like', '%'. $term .'%')->latest()->paginate(10);
+        return view('articles.index', compact(['articles', 'term']));
     }
 }

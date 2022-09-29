@@ -82,7 +82,7 @@ REGISTER
             <button type="submit" class="btn">Register</button>
         </div>
     </div>
-    <div class="text">
+    <div class="text text-center">
         <span>Already have an account?</span>
         <a href="/login">Log In</a>
     </div>
